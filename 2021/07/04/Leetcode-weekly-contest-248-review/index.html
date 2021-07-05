@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"casperwin.me","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="SummaryI was not doing well in this contest which was under my average performace. That makes me write a review on the contest rather than let it go so easily. I solved only the first problem which us">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Leetcode Weekly Contest 248 Review">
+<meta property="og:url" content="http://casperwin.me/2021/07/04/Leetcode-weekly-contest-248-review/index.html">
+<meta property="og:site_name" content="Just Hack">
+<meta property="og:description" content="SummaryI was not doing well in this contest which was under my average performace. That makes me write a review on the contest rather than let it go so easily. I solved only the first problem which us">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-07-05T00:06:19.000Z">
+<meta property="article:modified_time" content="2021-07-05T00:52:18.853Z">
+<meta property="article:author" content="Casper">
+<meta property="article:tag" content="Leetcode">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://casperwin.me/2021/07/04/Leetcode-weekly-contest-248-review/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Leetcode Weekly Contest 248 Review | Just Hack</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Just Hack</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://casperwin.me/2021/07/04/Leetcode-weekly-contest-248-review/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/emoji.png">
+      <meta itemprop="name" content="Casper">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Just Hack">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Leetcode Weekly Contest 248 Review
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-07-04 17:06:19 / 修改时间：17:52:18" itemprop="dateCreated datePublished" datetime="2021-07-04T17:06:19-07:00">2021-07-04</time>
+            </span>
+
+          
+            <span id="/2021/07/04/Leetcode-weekly-contest-248-review/" class="post-meta-item leancloud_visitors" data-flag-title="Leetcode Weekly Contest 248 Review" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>I was not doing well in this contest which was under my average performace. That makes me write a review on the contest rather than let it go so easily.</p>
+<p>I solved only the first problem which usually a warm-up. I couldn’t understand the second problem description so I jumped to the third one. I finished with one solution on the third one but could only get a result of “Time Limit Exceeded”. I didn’t even touch the last one which was the hardest one.</p>
+<span id="more"></span>
+
+<h2 id="1-Longest-Common-Subpath"><a href="#1-Longest-Common-Subpath" class="headerlink" title="1. Longest Common Subpath"></a>1. Longest Common Subpath</h2><p><strong>Easy</strong></p>
+<h3 id="Problem-description"><a href="#Problem-description" class="headerlink" title="Problem description"></a>Problem description</h3><p>Given a <strong>zero-based permutation</strong> <code>nums</code> (<strong>0-indexed</strong>), build an array <code>ans</code> of the <strong>same length</strong> where <code>ans[i] = nums[nums[i]]</code> for each <code>0 &lt;= i &lt; nums.length</code> and return it.</p>
+<p>A <strong>zero-based permutation</strong> <code>nums</code> is an array of <strong>distinct</strong> integers from <code>0</code> to <code>nums.length - 1</code> (<strong>inclusive</strong>).</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Input: nums = [0,2,1,5,3,4]</span><br><span class="line">Output: [0,1,2,4,5,3]</span><br><span class="line">Explanation: The array ans is built as follows:</span><br><span class="line">ans = [nums[nums[0]], nums[nums[1]], nums[nums[2]], nums[nums[3]], nums[nums[4]], nums[nums[5]]]</span><br><span class="line">    = [nums[0], nums[2], nums[1], nums[5], nums[3], nums[4]]</span><br><span class="line">    = [0,1,2,4,5,3]</span><br></pre></td></tr></table></figure>
+
+<p>Example 2:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Input: nums = [5,0,1,2,3,4]</span><br><span class="line">Output: [4,5,0,1,2,3]</span><br><span class="line">Explanation: The array ans is built as follows:</span><br><span class="line">ans = [nums[nums[0]], nums[nums[1]], nums[nums[2]], nums[nums[3]], nums[nums[4]], nums[nums[5]]]</span><br><span class="line">    = [nums[5], nums[0], nums[1], nums[2], nums[3], nums[4]]</span><br><span class="line">    = [4,5,0,1,2,3]</span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>1 &lt;= nums.length &lt;= 1000</code></li>
+<li><code>0 &lt;= nums[i] &lt; nums.length</code></li>
+<li>The elements in <code>nums</code> are <strong>distinct</strong>.</li>
+</ul>
+<blockquote>
+<p><strong>Follow-up:</strong> Can you solve it without using an extra space (i.e., O(1) memory)?</p>
+</blockquote>
+<h3 id="Review"><a href="#Review" class="headerlink" title="Review"></a>Review</h3><p>The first problem in a Weekly Contest usually doesn’t involve any typical algorithms. It is safe to translate the description into code directly in this problem.</p>
+<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">vector&lt;<span class="keyword">int</span>&gt; <span class="title">buildArray</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; nums)</span> </span>&#123;</span><br><span class="line">        vector&lt;<span class="keyword">int</span>&gt; ans = nums;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            ans[i] = nums[nums[i]];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-Eliminate-Maximum-Number-of-Monsters"><a href="#2-Eliminate-Maximum-Number-of-Monsters" class="headerlink" title="2. Eliminate Maximum Number of Monsters"></a>2. Eliminate Maximum Number of Monsters</h2><p><strong>Medium</strong></p>
+<h3 id="Problem-description-1"><a href="#Problem-description-1" class="headerlink" title="Problem description"></a>Problem description</h3><p>You are playing a video game where you are defending your city from a group of <code>n</code> monsters. You are given a <strong>0-indexed</strong> integer array <code>dist</code> of size <code>n</code>, where <code>dist[i]</code> is the <strong>initial distance</strong> in meters of the <code>ith</code> monster from the city.</p>
+<p>The monsters walk toward the city at a <strong>constant</strong> speed. The speed of each monster is given to you in an integer array speed of size n, where <code>speed[i]</code> is the speed of the <code>ith</code> monster in meters per minute.</p>
+<p>The monsters start moving at <strong>minute 0</strong>. You have a weapon that you can <strong>choose</strong> to use at the start of every minute, including minute 0. You cannot use the weapon in the middle of a minute. The weapon can eliminate any monster that is still alive. You lose when any monster reaches your city. If a monster reaches the city <strong>exactly</strong> at the start of a minute, it counts as a <strong>loss</strong>, and the game ends before you can use your weapon in that minute.</p>
+<p>Return the <strong>maximum</strong> number of monsters that you can eliminate before you lose, or <code>n</code> if you can eliminate all the monsters before they reach the city.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Input: dist = [1,3,4], speed = [1,1,1]</span><br><span class="line">Output: 3</span><br><span class="line">Explanation:</span><br><span class="line">At the start of minute 0, the distances of the monsters are [1,3,4], you eliminate the first monster.</span><br><span class="line">At the start of minute 1, the distances of the monsters are [X,2,3], you don&#x27;t do anything.</span><br><span class="line">At the start of minute 2, the distances of the monsters are [X,1,2], you eliminate the second monster.</span><br><span class="line">At the start of minute 3, the distances of the monsters are [X,X,1], you eliminate the third monster.</span><br><span class="line">All 3 monsters can be eliminated.</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Input: dist = [1,1,2,3], speed = [1,1,1,1]</span><br><span class="line">Output: 1</span><br><span class="line">Explanation:</span><br><span class="line">At the start of minute 0, the distances of the monsters are [1,1,2,3], you eliminate the first monster.</span><br><span class="line">At the start of minute 1, the distances of the monsters are [X,0,1,2], so you lose.</span><br><span class="line">You can only eliminate 1 monster.</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 3:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Input: dist = [3,2,4], speed = [5,3,2]</span><br><span class="line">Output: 1</span><br><span class="line">Explanation:</span><br><span class="line">At the start of minute 0, the distances of the monsters are [3,2,4], you eliminate the first monster.</span><br><span class="line">At the start of minute 1, the distances of the monsters are [X,0,2], so you lose.</span><br><span class="line">You can only eliminate 1 monster.</span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>n == dist.length == speed.length</code></li>
+<li><code>1 &lt;= n &lt;= 105</code></li>
+<li><code>1 &lt;= dist[i], speed[i] &lt;= 105</code></li>
+</ul>
+<h3 id="Review-1"><a href="#Review-1" class="headerlink" title="Review"></a>Review</h3><p>I was not understanding why in the 1st example the player would choose to do noting in the 3rd step. Then I simply skipped the problem for the moment.</p>
+<p>It turned out to be much easier than I was thinking. Instead of dealing with the monsters with dist, we could think about the problem in time space. That is to say, with given distances and the (constant) speeds, we can easily convert the <code>dist</code> array into the minutes needed to reach the city. The problem requires to eliminate the monster before it reach 0 distance to the city. So we use the distance as <code>dist[i] - 1</code> and it is devided by the speed respectively.</p>
+<p>Sort the new time distance and use simulation to find the number that can be eliminated.</p>
+<h3 id="Solution-1"><a href="#Solution-1" class="headerlink" title="Solution"></a>Solution</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">eliminateMaximum</span><span class="params">(vector&lt;<span class="keyword">int</span>&gt;&amp; dist, vector&lt;<span class="keyword">int</span>&gt;&amp; speed)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; dist.<span class="built_in">size</span>();  i++) &#123;</span><br><span class="line">            <span class="comment">// compute the time in minutes to reach the city</span></span><br><span class="line">            dist[i] = (dist[i] - <span class="number">1</span>) / speed[i];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// sort based on the minutes</span></span><br><span class="line">        <span class="built_in">sort</span>(dist.<span class="built_in">begin</span>(), dist.<span class="built_in">end</span>());</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; dist.<span class="built_in">size</span>(); i++) &#123;</span><br><span class="line">            <span class="keyword">if</span>(i &gt; dist[i]) &#123;</span><br><span class="line">                <span class="keyword">return</span> i;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> dist.<span class="built_in">size</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://leetcode.com/problems/eliminate-maximum-number-of-monsters/discuss/1314550/Sort-by-arrival">Leetcode Discuss - Sort by arrival</a></li>
+</ul>
+<h2 id="3-Count-Good-Numbers"><a href="#3-Count-Good-Numbers" class="headerlink" title="3. Count Good Numbers"></a>3. Count Good Numbers</h2><p><strong>Medium</strong></p>
+<h3 id="Problem-description-2"><a href="#Problem-description-2" class="headerlink" title="Problem description"></a>Problem description</h3><p>A digit string is <strong>good</strong> if the digits (<strong>0-indexed</strong>) at <strong>even</strong> indices are <strong>even</strong> and the digits at <strong>odd</strong> indices are <strong>prime</strong> (<code>2</code>, <code>3</code>, <code>5</code>, or <code>7</code>).</p>
+<ul>
+<li>For example, <code>&quot;2582&quot;</code> is good because the digits (<code>2</code> and <code>8</code>) at even positions are even and the digits (<code>5</code> and <code>2</code>) at odd positions are prime. However, <code>&quot;3245&quot;</code> is not good because <code>3</code> is at an even index but is not even.</li>
+</ul>
+<p>Given an integer <code>n</code>, return the total number of good digit strings of length <code>n</code>. Since the answer may be large, <strong>return it modulo</strong> <code>1e9 + 7</code>.</p>
+<p>A <strong>digit string</strong> is a string consisting of digits <code>0</code> through <code>9</code> that may contain leading zeros.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: n = 1</span><br><span class="line">Output: 5</span><br><span class="line">Explanation: The good numbers of length 1 are &quot;0&quot;, &quot;2&quot;, &quot;4&quot;, &quot;6&quot;, &quot;8&quot;.</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: n = 4</span><br><span class="line">Output: 400</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 3:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: n = 50</span><br><span class="line">Output: 564908303</span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>1 &lt;= n &lt;= 1015</code></li>
+</ul>
+<h3 id="Review-2"><a href="#Review-2" class="headerlink" title="Review"></a>Review</h3><p>The problem with an extra requiremnt to deal with the too big number as in the following,</p>
+<pre><code>&quot;Since the answer may be large, return it modulo 1e9 + 7.&quot;
+</code></pre>
+<p>always makes the problem trickier.</p>
+<p>Another challenging point is to save the time of the power compuation. For example, to find <code>20^20</code>, we don’t have to do <code>20</code> times mulplications which have lots of repeatations. Once we have <code>20*20=400</code>, we can do one more mulplication for <code>20^4</code> as <code>400*400</code>. The similar for other cases.</p>
+<h3 id="Solution-Time-Limit-Exceeded"><a href="#Solution-Time-Limit-Exceeded" class="headerlink" title="Solution (Time Limit Exceeded)"></a>Solution (<code>Time Limit Exceeded</code>)</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">countGoodNumbers</span><span class="params">(<span class="keyword">long</span> <span class="keyword">long</span> n)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(n == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(n == <span class="number">1</span>) <span class="keyword">return</span> <span class="number">5</span>;</span><br><span class="line">        <span class="keyword">if</span>(n == <span class="number">2</span>) <span class="keyword">return</span> <span class="number">20</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">long</span> <span class="keyword">long</span> ans = <span class="number">1</span>, M = <span class="number">1e9</span>+<span class="number">7</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n/<span class="number">2</span>; i++) &#123;</span><br><span class="line">            ans = ans * <span class="number">20</span> % M;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(n%<span class="number">2</span> == <span class="number">1</span>) &#123;</span><br><span class="line">            ans = ans * <span class="number">5</span> % M;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> ans % M;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Solution-Accepted"><a href="#Solution-Accepted" class="headerlink" title="Solution (Accepted)"></a>Solution (Accepted)</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">countGoodNumbers</span><span class="params">(<span class="keyword">long</span> <span class="keyword">long</span> n)</span> </span>&#123;</span><br><span class="line">        ll num_of_four = n/<span class="number">2</span>;</span><br><span class="line">        ll num_of_five = n - n/<span class="number">2</span>;</span><br><span class="line">        <span class="keyword">return</span> (<span class="built_in">power</span>(<span class="number">4</span>, num_of_four) % p) * (<span class="built_in">power</span>(<span class="number">5</span>, num_of_five) % p) % p;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// find x^y efficiently</span></span><br><span class="line">    <span class="function">ll <span class="title">power</span><span class="params">(ll x, ll y)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(x == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        ll ans = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        x = x % p;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(y &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span>(y&amp;<span class="number">1</span>) ans = ans * x % p;</span><br><span class="line">            y = y &gt;&gt; <span class="number">1</span>; <span class="comment">// same as y/2</span></span><br><span class="line">            x = x * x % p;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> p = <span class="number">1e9</span> + <span class="number">7</span>; <span class="comment">// modulo</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Should we use “#define ll long long” or “typedef long long ll”?<br><strong>Answer:</strong> There is no difference in time. But using <code>#define ll long long</code> is not recommended by specifications and <code>typedef</code> is better.</p>
+</blockquote>
+<h3 id="Reference-1"><a href="#Reference-1" class="headerlink" title="Reference"></a>Reference</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://leetcode.com/problems/count-good-numbers/discuss/1314319/c%2B%2B-Full-Explanation-power-fast-power-modular-power">Leetcode Discuss -<br>[c++] Full Explanation, power, fast power, modular power</a></li>
+</ul>
+<h2 id="4-Longest-Common-Subpath"><a href="#4-Longest-Common-Subpath" class="headerlink" title="4. Longest Common Subpath"></a>4. Longest Common Subpath</h2><p><strong>Hard</strong></p>
+<h3 id="Problem-description-3"><a href="#Problem-description-3" class="headerlink" title="Problem description"></a>Problem description</h3><p>There is a country of <code>n</code> cities numbered from <code>0</code> to <code>n - 1</code>. In this country, there is a road connecting <strong>every pair</strong> of cities.</p>
+<p>There are <code>m</code> friends numbered from <code>0</code> to <code>m - 1</code> who are traveling through the country. Each one of them will take a path consisting of some cities. Each path is represented by an integer array that contains the visited cities in order. The path may contain a city <strong>more than</strong> once, but the same city will not be listed consecutively.</p>
+<p>Given an integer <code>n</code> and a 2D integer array <code>paths</code> where <code>paths[i]</code> is an integer array representing the path of the <code>ith</code> friend, return the length of the <strong>longest common subpath</strong> that is shared by <strong>every</strong> friend’s path, or <code>0</code> if there is no common subpath at all.</p>
+<p>A <strong>subpath</strong> of a path is a contiguous sequence of cities within that path.</p>
+<p><strong>Example 1:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Input: n = 5, paths = [[0,1,2,3,4],</span><br><span class="line">                       [2,3,4],</span><br><span class="line">                       [4,0,1,2,3]]</span><br><span class="line">Output: 2</span><br><span class="line">Explanation: The longest common subpath is [2,3].</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 2:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Input: n = 3, paths = [[0],[1],[2]]</span><br><span class="line">Output: 0</span><br><span class="line">Explanation: There is no common subpath shared by the three paths.</span><br></pre></td></tr></table></figure>
+
+<p><strong>Example 3:</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Input: n = 5, paths = [[0,1,2,3,4],</span><br><span class="line">                       [4,3,2,1,0]]</span><br><span class="line">Output: 1</span><br><span class="line">Explanation: The possible longest common subpaths are [0], [1], [2], [3], and [4]. All have a length of 1.</span><br></pre></td></tr></table></figure>
+
+<p><strong>Constraints:</strong></p>
+<ul>
+<li><code>1 &lt;= n &lt;= 105</code></li>
+<li><code>m == paths.length</code></li>
+<li><code>2 &lt;= m &lt;= 105</code></li>
+<li><code>sum(paths[i].length) &lt;= 105</code></li>
+<li><code>0 &lt;= paths[i][j] &lt; n</code></li>
+<li>The same city is not listed multiple times consecutively in <code>paths[i]</code>.</li>
+</ul>
+<h3 id="Review-Incomplete"><a href="#Review-Incomplete" class="headerlink" title="Review (Incomplete)"></a>Review (Incomplete)</h3><p>Some reference solutions in Leetcode Discuss solved it with the so-called “Rolling Hash” which I have never heard.</p>
+<p>The idea as I observe is to encode the path into a hash value. By rolling the hash values from one path to the next, we can find the overlapped elements.</p>
+<p>I know currently the analysis about the problem is remained less concrete and needs more depth consideration. It will done later.</p>
+<h3 id="Solution-2"><a href="#Solution-2" class="headerlink" title="Solution"></a>Solution</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line">typedef long long ll;</span><br><span class="line"></span><br><span class="line">class Solution &#123;</span><br><span class="line">public:</span><br><span class="line">    int longestCommonSubpath(int n, vector&lt;vector&lt;int&gt;&gt;&amp; paths) &#123;</span><br><span class="line">        int l = 0, r = min_element(paths.begin(), paths.end(), [](const vector&lt;int&gt; &amp;lhs, const vector&lt;int&gt; &amp;rhs) &#123;</span><br><span class="line">            return lhs.size() &lt; rhs.size();</span><br><span class="line">        &#125;)-&gt;size();</span><br><span class="line"></span><br><span class="line">        int ans = 0;</span><br><span class="line"></span><br><span class="line">        while(l &lt;= r) &#123;</span><br><span class="line">            int mid = l + (r-l)/2;</span><br><span class="line">            if(solve(paths, mid)) &#123;</span><br><span class="line">                ans = mid;</span><br><span class="line">                l = mid + 1;</span><br><span class="line">            &#125;</span><br><span class="line">            else &#123;</span><br><span class="line">                r = mid - 1;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return l-1;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    bool solve(vector&lt;vector&lt;int&gt;&gt; &amp;paths, int mid) &#123;</span><br><span class="line">        ll hash = 1; // why &#x27;1&#x27;?</span><br><span class="line">        ll base = 1000003; // how to pick this number as base?</span><br><span class="line"></span><br><span class="line">        for(int i = 0; i &lt; mid-1; i++) &#123;</span><br><span class="line">            hash = (hash * base) % mod;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        unordered_set&lt;ll&gt; prev;</span><br><span class="line"></span><br><span class="line">        for(int k = 0; k &lt; paths.size(); k++) &#123;</span><br><span class="line">            auto path = paths[k];</span><br><span class="line"></span><br><span class="line">            int n = path.size();</span><br><span class="line"></span><br><span class="line">            unordered_set&lt;ll&gt; curr;</span><br><span class="line"></span><br><span class="line">            ll val = 0; // why &#x27;0&#x27;?</span><br><span class="line"></span><br><span class="line">            int i;</span><br><span class="line"></span><br><span class="line">            for(i = 0; i &lt; mid; i++) &#123;</span><br><span class="line">                val = (val * base + path[i]) % mod;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            for(int j = i; j &lt;= n; j++) &#123;</span><br><span class="line">                if(k == 0 || prev.count(val)) &#123;</span><br><span class="line">                    curr.insert(val);</span><br><span class="line">                &#125;</span><br><span class="line">                if(j != n) &#123;</span><br><span class="line">                    val = ((base * (val - path[j-i] * hash % mod + mod) % mod) + path[j]) % mod;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            swap(prev, curr);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        if(prev.empty()) return false;</span><br><span class="line"></span><br><span class="line">        return true;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ll mod = 1000000000077; // ?</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Reference-2"><a href="#Reference-2" class="headerlink" title="Reference"></a>Reference</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://leetcode.com/problems/longest-common-subpath/discuss/1314826/Rolling-Hash-%2B-Collision-Check">Rolling Hash + Collision Check</a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Leetcode/" rel="tag"><i class="fa fa-tag"></i> Leetcode</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/07/31/%E4%BB%A3%E7%A0%81%E8%B5%8F%E6%9E%90_Stanley_Path_Tracking_Controller/" rel="prev" title="代码赏析 | Stanley Path Tracking Controller">
+      <i class="fa fa-chevron-left"></i> 代码赏析 | Stanley Path Tracking Controller
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary"><span class="nav-number">1.</span> <span class="nav-text">Summary</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Longest-Common-Subpath"><span class="nav-number">2.</span> <span class="nav-text">1. Longest Common Subpath</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Problem-description"><span class="nav-number">2.1.</span> <span class="nav-text">Problem description</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Review"><span class="nav-number">2.2.</span> <span class="nav-text">Review</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Solution"><span class="nav-number">2.3.</span> <span class="nav-text">Solution</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Eliminate-Maximum-Number-of-Monsters"><span class="nav-number">3.</span> <span class="nav-text">2. Eliminate Maximum Number of Monsters</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Problem-description-1"><span class="nav-number">3.1.</span> <span class="nav-text">Problem description</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Review-1"><span class="nav-number">3.2.</span> <span class="nav-text">Review</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Solution-1"><span class="nav-number">3.3.</span> <span class="nav-text">Solution</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reference"><span class="nav-number">3.4.</span> <span class="nav-text">Reference</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-Count-Good-Numbers"><span class="nav-number">4.</span> <span class="nav-text">3. Count Good Numbers</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Problem-description-2"><span class="nav-number">4.1.</span> <span class="nav-text">Problem description</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Review-2"><span class="nav-number">4.2.</span> <span class="nav-text">Review</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Solution-Time-Limit-Exceeded"><span class="nav-number">4.3.</span> <span class="nav-text">Solution (Time Limit Exceeded)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Solution-Accepted"><span class="nav-number">4.4.</span> <span class="nav-text">Solution (Accepted)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reference-1"><span class="nav-number">4.5.</span> <span class="nav-text">Reference</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Longest-Common-Subpath"><span class="nav-number">5.</span> <span class="nav-text">4. Longest Common Subpath</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Problem-description-3"><span class="nav-number">5.1.</span> <span class="nav-text">Problem description</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Review-Incomplete"><span class="nav-number">5.2.</span> <span class="nav-text">Review (Incomplete)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Solution-2"><span class="nav-number">5.3.</span> <span class="nav-text">Solution</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reference-2"><span class="nav-number">5.4.</span> <span class="nav-text">Reference</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Casper"
+      src="/images/emoji.png">
+  <p class="site-author-name" itemprop="name">Casper</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/xpharry" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;xpharry" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Casper</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+<script>
+  (function() {
+    function leancloudSelector(url) {
+      url = encodeURI(url);
+      return document.getElementById(url).querySelector('.leancloud-visitors-count');
+    }
+
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = decodeURI(visitors.id);
+      var title = visitors.dataset.flagTitle;
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            leancloudSelector(url).innerText = counter.time + 1;
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .catch(error => {
+                console.error('Failed to save visitor count', error);
+              });
+          } else {
+              leancloudSelector(url).innerText = 'Counter not initialized! More info at console err msg.';
+              console.error('ATTENTION! LeanCloud counter has security bug, see how to solve it here: https://github.com/theme-next/hexo-leancloud-counter-security. \n However, you can still use LeanCloud without security, by setting `security` option to `false`.');
+            
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return decodeURI(element.id);
+      });
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url: { '$in': entries } })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          for (let url of entries) {
+            let target = results.find(item => item.url === url);
+            leancloudSelector(url).innerText = target ? target.time : 0;
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    let { app_id, app_key, server_url } = {"enable":true,"app_id":null,"app_key":null,"server_url":null,"security":true};
+    function fetchData(api_server) {
+      var Counter = (method, url, data) => {
+        return fetch(`${api_server}/1.1${url}`, {
+          method,
+          headers: {
+            'X-LC-Id'     : app_id,
+            'X-LC-Key'    : app_key,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        if (CONFIG.hostname !== location.hostname) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    }
+
+    let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+
+    if (api_server) {
+      fetchData(api_server);
+    } else {
+      fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id)
+        .then(response => response.json())
+        .then(({ api_server }) => {
+          fetchData('https://' + api_server);
+        });
+    }
+  })();
+</script>
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

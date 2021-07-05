@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"casperwin.me","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="这一篇主要解决几个问题： １．计算单元２．运动单元驱动３．供电４．机械固定 也就是说，除了小车车身，Lidar和Web Camera全部是来自新的组件．其实，仅就这几样而言也说不上很满意，只是为了尽可能得把现有组件利用起来．">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RoverPi小车 第二篇：硬件选型和组装">
+<meta property="og:url" content="http://casperwin.me/2019/05/14/RoverPi%E5%B0%8F%E8%BD%A6_%E7%AC%AC%E4%BA%8C%E7%AF%87_%E7%A1%AC%E4%BB%B6%E9%80%89%E5%9E%8B/index.html">
+<meta property="og:site_name" content="Just Hack">
+<meta property="og:description" content="这一篇主要解决几个问题： １．计算单元２．运动单元驱动３．供电４．机械固定 也就是说，除了小车车身，Lidar和Web Camera全部是来自新的组件．其实，仅就这几样而言也说不上很满意，只是为了尽可能得把现有组件利用起来．">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://www.dropbox.com/s/k6q54nuwmnef8q2/IMG_20190512_204935.jpg?raw=1">
+<meta property="og:image" content="https://www.raspberrypi.org/magpi/wp-content/uploads/2017/04/Raspberry-Pi-3.jpg">
+<meta property="og:image" content="http://fritzing.org/media/fritzing-repo/projects/w/working-with-l298n-dc-motor-driver/images/Dual-H-Bridge-DC-Stepper-Motor-Drive-Controller-Board-Module-Arduino-L298N-HE2.jpg">
+<meta property="og:image" content="https://paper-attachments.dropbox.com/s_F2F5BA21703E8CFE0F69C6C645220F346DE5C1561E56AE695BBFC0012CFC9BA8_1557718528861_718PGO1TDgL._SL1500_.jpg">
+<meta property="og:image" content="https://www.dropbox.com/s/k6q54nuwmnef8q2/IMG_20190512_204935.jpg?raw=1">
+<meta property="og:image" content="https://paper-attachments.dropbox.com/s_F2F5BA21703E8CFE0F69C6C645220F346DE5C1561E56AE695BBFC0012CFC9BA8_1557718939652_IMG_1659.JPG">
+<meta property="article:published_time" content="2019-05-14T19:00:27.000Z">
+<meta property="article:modified_time" content="2021-07-05T00:53:43.870Z">
+<meta property="article:author" content="Casper">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://www.dropbox.com/s/k6q54nuwmnef8q2/IMG_20190512_204935.jpg?raw=1">
+
+<link rel="canonical" href="http://casperwin.me/2019/05/14/RoverPi%E5%B0%8F%E8%BD%A6_%E7%AC%AC%E4%BA%8C%E7%AF%87_%E7%A1%AC%E4%BB%B6%E9%80%89%E5%9E%8B/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>RoverPi小车 第二篇：硬件选型和组装 | Just Hack</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Just Hack</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>站点地图</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://casperwin.me/2019/05/14/RoverPi%E5%B0%8F%E8%BD%A6_%E7%AC%AC%E4%BA%8C%E7%AF%87_%E7%A1%AC%E4%BB%B6%E9%80%89%E5%9E%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/emoji.png">
+      <meta itemprop="name" content="Casper">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Just Hack">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          RoverPi小车 第二篇：硬件选型和组装
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-05-14 12:00:27" itemprop="dateCreated datePublished" datetime="2019-05-14T12:00:27-07:00">2019-05-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-07-04 17:53:43" itemprop="dateModified" datetime="2021-07-04T17:53:43-07:00">2021-07-04</time>
+              </span>
+
+          
+            <span id="/2019/05/14/RoverPi%E5%B0%8F%E8%BD%A6_%E7%AC%AC%E4%BA%8C%E7%AF%87_%E7%A1%AC%E4%BB%B6%E9%80%89%E5%9E%8B/" class="post-meta-item leancloud_visitors" data-flag-title="RoverPi小车 第二篇：硬件选型和组装" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <img src="https://www.dropbox.com/s/k6q54nuwmnef8q2/IMG_20190512_204935.jpg?raw=1" alt="venv" style="height:300px;" align="middle">
+
+<p>这一篇主要解决几个问题：</p>
+<p>１．计算单元<br>２．运动单元驱动<br>３．供电<br>４．机械固定</p>
+<p>也就是说，除了小车车身，Lidar和Web Camera全部是来自新的组件．其实，仅就这几样而言也说不上很满意，只是为了尽可能得把现有组件利用起来．</p>
+<span id="more"></span>
+
+<ul>
+<li>车身就是普通的铝合金底盘和四个轮子，在某宝或者亚马逊逊上可以找到很多替代；</li>
+<li>Lidar看起来是个仿品，山寨的一代RPLidar，建议大家直接使用原版，毕竟有充分的官方软件支持。我后面会介绍到的SLAM程序也是参考自RPLidar ；</li>
+<li>Ｗeb Camera也可以用Raspberry Pi Camera替代.</li>
+</ul>
+<p>题外话，原本的众筹项目简直就是诈骗项目在 Kickstarter 上被当成诈骗项目了。骗钱是实打实了，可以长达7个月没有更新。</p>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>下表是我所使用的机械和硬件单元：</p>
+<table>
+<thead>
+<tr>
+<th>组件</th>
+<th>价格</th>
+<th>来源</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>四轮小车底盘，包含２个直流电机带编码器，２个履带，４个车轮</td>
+<td>$20（估计）</td>
+<td>既有<br>可替换为：任意机器人小车底盘，大多不超过$20．给一个例子：<a target="_blank" rel="noopener" href="https://www.amazon.com/Rubber-Aluminum-Chassis-Graduation-Project/dp/B07B8Z7J8J/ref=sr_1_18?crid=338XA4RRM8NAW&amp;keywords=robot+car+chassis&amp;qid=1557703804&amp;s=gateway&amp;sprefix=robot+car+c,aps,198&amp;sr=8-18">https://www.amazon.com/Rubber-Aluminum-Chassis-Graduation-Project/dp/B07B8Z7J8J/ref=sr_1_18?crid=338XA4RRM8NAW&amp;keywords=robot+car+chassis&amp;qid=1557703804&amp;s=gateway&amp;sprefix=robot+car+c%2Caps%2C198&amp;sr=8-18</a></td>
+</tr>
+<tr>
+<td>2D Lidar</td>
+<td>$99（估计）</td>
+<td>既有，不知名<br>可替换为：<a target="_blank" rel="noopener" href="https://www.amazon.com/RPLiDAR-A1M8-Degree-Laser-Scanner/dp/B07H7X3SFF/ref=sr_1_3?keywords=rplidar&qid=1557703713&s=gateway&sr=8-3"><strong>RPLiDAR A1M8 360 Degree Laser Scanner Kit - 12M Range</strong></a><strong>,</strong> <a target="_blank" rel="noopener" href="https://www.amazon.com/RPLiDAR-A1M8-Degree-Laser-Scanner/dp/B07H7X3SFF/ref=sr_1_3?keywords=rplidar&qid=1557703713&s=gateway&sr=8-3">$99.00</a></td>
+</tr>
+<tr>
+<td>Web Camera</td>
+<td>$14（估计）</td>
+<td>既有，不知名<br>可替换为：Raspberry Pi Camera</td>
+</tr>
+<tr>
+<td>树莓派３B+</td>
+<td>$38.10</td>
+<td><a target="_blank" rel="noopener" href="https://www.amazon.com/gp/product/B07BDR5PDW/ref=ppx_yo_dt_b_asin_title_o04_s00?ie=UTF8&amp;psc=1">https://www.amazon.com/gp/product/B07BDR5PDW/ref=ppx_yo_dt_b_asin_title_o04_s00?ie=UTF8&amp;psc=1</a></td>
+</tr>
+<tr>
+<td>SanDisk Extreme 32GB microSDHC UHS-I Card with Adapter</td>
+<td>$14.49</td>
+<td><a target="_blank" rel="noopener" href="https://www.amazon.com/gp/product/B01HU3Q6F2/ref=ppx_yo_dt_b_asin_title_o02_s00?ie=UTF8&amp;psc=1">https://www.amazon.com/gp/product/B01HU3Q6F2/ref=ppx_yo_dt_b_asin_title_o02_s00?ie=UTF8&amp;psc=1</a></td>
+</tr>
+<tr>
+<td>L298N电机驱动板</td>
+<td>$6.99</td>
+<td><a target="_blank" rel="noopener" href="https://www.amazon.com/gp/product/B014KMHSW6/ref=ppx_yo_dt_b_asin_title_o00_s00?ie=UTF8&amp;psc=1">https://www.amazon.com/gp/product/B014KMHSW6/ref=ppx_yo_dt_b_asin_title_o00_s00?ie=UTF8&amp;psc=1</a></td>
+</tr>
+<tr>
+<td>电池盒</td>
+<td>$4.99</td>
+<td><a target="_blank" rel="noopener" href="https://www.amazon.com/gp/product/B07DBM11LF/ref=ppx_yo_dt_b_asin_title_o01_s00?ie=UTF8&amp;psc=1">https://www.amazon.com/gp/product/B07DBM11LF/ref=ppx_yo_dt_b_asin_title_o01_s00?ie=UTF8&amp;psc=1</a></td>
+</tr>
+<tr>
+<td>树莓派供电模块Li电池</td>
+<td>$17.89</td>
+<td><a target="_blank" rel="noopener" href="https://www.amazon.com/gp/product/B06W9FWDSP/ref=ppx_yo_dt_b_asin_title_o04_s00?ie=UTF8&amp;psc=1">https://www.amazon.com/gp/product/B06W9FWDSP/ref=ppx_yo_dt_b_asin_title_o04_s00?ie=UTF8&amp;psc=1</a></td>
+</tr>
+<tr>
+<td>eBoot 180 Pieces Male Female Hex Brass Spacer Standoff Screw Nut Assortment Kit (M3)</td>
+<td>$10.99</td>
+<td><a target="_blank" rel="noopener" href="https://www.amazon.com/gp/product/B0756CW6Y2/ref=ppx_yo_dt_b_asin_title_o07_s00?ie=UTF8&amp;psc=1">https://www.amazon.com/gp/product/B0756CW6Y2/ref=ppx_yo_dt_b_asin_title_o07_s00?ie=UTF8&amp;psc=1</a></td>
+</tr>
+<tr>
+<td>树莓派扩展板</td>
+<td>$6.19</td>
+<td><a target="_blank" rel="noopener" href="https://www.amazon.com/gp/product/B074T7D1V5/ref=ppx_yo_dt_b_asin_title_o07_s00?ie=UTF8&amp;psc=1">https://www.amazon.com/gp/product/B074T7D1V5/ref=ppx_yo_dt_b_asin_title_o07_s00?ie=UTF8&amp;psc=1</a></td>
+</tr>
+<tr>
+<td>JST PH 2.0MM连接线</td>
+<td>$7.69</td>
+<td><a target="_blank" rel="noopener" href="https://www.amazon.com/gp/product/B07FBDZHNX/ref=ppx_yo_dt_b_asin_title_o00_s00?ie=UTF8&amp;psc=1">https://www.amazon.com/gp/product/B07FBDZHNX/ref=ppx_yo_dt_b_asin_title_o00_s00?ie=UTF8&amp;psc=1</a></td>
+</tr>
+<tr>
+<td>电路连接跳线</td>
+<td>$6.78</td>
+<td><a target="_blank" rel="noopener" href="https://www.amazon.com/gp/product/B01LZF1ZSZ/ref=ppx_yo_dt_b_asin_title_o08_s00?ie=UTF8&amp;psc=1">https://www.amazon.com/gp/product/B01LZF1ZSZ/ref=ppx_yo_dt_b_asin_title_o08_s00?ie=UTF8&amp;psc=1</a></td>
+</tr>
+</tbody></table>
+<h2 id="计算单元"><a href="#计算单元" class="headerlink" title="计算单元"></a>计算单元</h2><p>其实这一部分没有什么悬念，小车底盘的尺寸以及功能，用Raspberry Pi非常适合，这里选用最新的版本，Raspberry Pi 3 B+．如果还会做下一代的话，我想我会有兴趣尝试Nvidia Jetson Nano，并且尝试AI级别的运算．</p>
+<p><img src="https://www.raspberrypi.org/magpi/wp-content/uploads/2017/04/Raspberry-Pi-3.jpg" alt="Raspberry Pi 3"></p>
+<h2 id="L298N电机驱动板"><a href="#L298N电机驱动板" class="headerlink" title="L298N电机驱动板"></a>L298N电机驱动板</h2><p><img src="http://fritzing.org/media/fritzing-repo/projects/w/working-with-l298n-dc-motor-driver/images/Dual-H-Bridge-DC-Stepper-Motor-Drive-Controller-Board-Module-Arduino-L298N-HE2.jpg" alt="L298N 电机驱动板"></p>
+<p>L298N驱动板算是一个比较常规的用于驱动两路直流电机的板子，与树莓派的配合使用也很常见．网上用很多教程，这里参考了这一篇博文：</p>
+<p><a target="_blank" rel="noopener" href="https://www.electronicshub.org/raspberry-pi-l298n-interface-tutorial-control-dc-motor-l298n-raspberry-pi/">https://www.electronicshub.org/raspberry-pi-l298n-interface-tutorial-control-dc-motor-l298n-raspberry-pi/</a></p>
+<h2 id="供电方案"><a href="#供电方案" class="headerlink" title="供电方案"></a>供电方案</h2><p>自己设计的项目，坑很多，很多问题是一边想一边解决一边又遇到新的问题．</p>
+<p>L298N本身需要6-12V的供电，我一开始就想到用一个装４个５号电池的电池盒为其供电．那么，从L298N还可以引出5V的电压，似乎正好可以解决树莓派的供电．但实验发现不可行，电机的供电是可以满足，但无法同时驱动树莓派甚至Lidar.</p>
+<p>所以，特意搜寻了可以给树莓派供电又容易叠加安装固定的电池，最后选择了这款带扩展板的Li电池，令人满意．</p>
+<p><img src="https://paper-attachments.dropbox.com/s_F2F5BA21703E8CFE0F69C6C645220F346DE5C1561E56AE695BBFC0012CFC9BA8_1557718528861_718PGO1TDgL._SL1500_.jpg"></p>
+<h2 id="机械固定"><a href="#机械固定" class="headerlink" title="机械固定"></a>机械固定</h2><p>原本CrazyPi的设计中，负责固定电路板的金属柱加入了磁性，为的是方便随时安装和拆卸，但对我现在的搭配，这个磁吸设计就是败笔．单单电池盒的重量，就使得磁力无法负荷基本的稳定要求，还经常连同连接的线一起车下来，非常恼人．</p>
+<p>既然原来的CrazyPi电路板已经被我放弃，我就把它放到车身下面，用于固定金属柱．L298N也同样固定在车身下方，便于连接电机．</p>
+<p><img src="https://www.dropbox.com/s/k6q54nuwmnef8q2/IMG_20190512_204935.jpg?raw=1"></p>
+<p>最后小车完成图如下：</p>
+<p><img src="https://paper-attachments.dropbox.com/s_F2F5BA21703E8CFE0F69C6C645220F346DE5C1561E56AE695BBFC0012CFC9BA8_1557718939652_IMG_1659.JPG"></p>
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>上图的设计应当说还是有一些待改进的地方甚至缺陷，有些坑还没有踩透。</p>
+<ul>
+<li>RoverPi小车电机驱动的测试一开始只做了悬空的测试，基本的向前向后和转向远动是听从指令的。一旦放到地面上，转向是死活也转不动。一方面是来自于车体重量大幅加重了，尤其是干电池组。另一方面，L298N是一个比较老的电机驱动板了，看起来需要更高电压和更大电池容量的组合。不同于两轮的差分运动(Differential Steer)，四轮的差分运动（英文叫Skid Steer）需要克服更大的滑动阻力。</li>
+<li>另一个设计上的缺陷是，树莓派和电池组的叠加，完全挡住了2D Lidar的部分扫描范围。这个Lidar我没有官方的参数表，如果是比照RPLidar A1的话，它的扫描范围应该是360度和12米。现在生生被挡掉了大约45度角。</li>
+<li>摄像头的摆放比起原来的设计是降级了，而且摆放位置也很尴尬。原本有两个舵机可以实现2个自由度的角度变换。现在直接固定在树莓派上，如果把Lidar的位置作为车头，摄像头放在后面就好比把眼睛放在后脑勺了。暂时没有找到合适的方案来解决机械上的限制。也许也可以考虑针对不同任务，改变小车前后的定义。</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/05/12/RoverPi%E5%B0%8F%E8%BD%A6_%E7%AC%AC%E4%B8%80%E7%AF%87_%E5%89%8D%E4%B8%96%E4%BB%8A%E7%94%9F/" rel="prev" title="RoverPi小车 第一篇：前世今生">
+      <i class="fa fa-chevron-left"></i> RoverPi小车 第一篇：前世今生
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/05/16/RoverPi%E5%B0%8F%E8%BD%A6_%E7%AC%AC%E4%B8%89%E7%AF%87_%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85%E5%92%8C%E7%BD%91%E7%BB%9C%E8%AE%BE%E7%BD%AE/" rel="next" title="RoverPi小车 第三篇：系统安装和网络设置">
+      RoverPi小车 第三篇：系统安装和网络设置 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E5%8D%95%E5%85%83"><span class="nav-number">2.</span> <span class="nav-text">计算单元</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#L298N%E7%94%B5%E6%9C%BA%E9%A9%B1%E5%8A%A8%E6%9D%BF"><span class="nav-number">3.</span> <span class="nav-text">L298N电机驱动板</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BE%9B%E7%94%B5%E6%96%B9%E6%A1%88"><span class="nav-number">4.</span> <span class="nav-text">供电方案</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%BA%E6%A2%B0%E5%9B%BA%E5%AE%9A"><span class="nav-number">5.</span> <span class="nav-text">机械固定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%8E%E8%AE%B0"><span class="nav-number">6.</span> <span class="nav-text">后记</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Casper"
+      src="/images/emoji.png">
+  <p class="site-author-name" itemprop="name">Casper</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/xpharry" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;xpharry" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Casper</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+<script>
+  (function() {
+    function leancloudSelector(url) {
+      url = encodeURI(url);
+      return document.getElementById(url).querySelector('.leancloud-visitors-count');
+    }
+
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = decodeURI(visitors.id);
+      var title = visitors.dataset.flagTitle;
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            leancloudSelector(url).innerText = counter.time + 1;
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .catch(error => {
+                console.error('Failed to save visitor count', error);
+              });
+          } else {
+              leancloudSelector(url).innerText = 'Counter not initialized! More info at console err msg.';
+              console.error('ATTENTION! LeanCloud counter has security bug, see how to solve it here: https://github.com/theme-next/hexo-leancloud-counter-security. \n However, you can still use LeanCloud without security, by setting `security` option to `false`.');
+            
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return decodeURI(element.id);
+      });
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url: { '$in': entries } })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          for (let url of entries) {
+            let target = results.find(item => item.url === url);
+            leancloudSelector(url).innerText = target ? target.time : 0;
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    let { app_id, app_key, server_url } = {"enable":true,"app_id":null,"app_key":null,"server_url":null,"security":true};
+    function fetchData(api_server) {
+      var Counter = (method, url, data) => {
+        return fetch(`${api_server}/1.1${url}`, {
+          method,
+          headers: {
+            'X-LC-Id'     : app_id,
+            'X-LC-Key'    : app_key,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        if (CONFIG.hostname !== location.hostname) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    }
+
+    let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+
+    if (api_server) {
+      fetchData(api_server);
+    } else {
+      fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id)
+        .then(response => response.json())
+        .then(({ api_server }) => {
+          fetchData('https://' + api_server);
+        });
+    }
+  })();
+</script>
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
