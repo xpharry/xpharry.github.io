@@ -1,5 +1,5 @@
 :root {
-  --body-bg-color: #fff;
+  --body-bg-color: #f8f8ff;
   --content-bg-color: #fff;
   --card-bg-color: #f5f5f5;
   --text-color: #555;
@@ -1169,7 +1169,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #49ffff;
+  background: #5c22f7;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2512,10 +2512,10 @@ ul.breadcrumb li + li:last-child {
 }
 .post-body h1,
 .post-body h2 {
-  border-bottom: 1px solid #fff;
+  border-bottom: 1px solid #f8f8ff;
 }
 .post-body h3 {
-  border-bottom: 1px dotted #fff;
+  border-bottom: 1px dotted #f8f8ff;
 }
 @media (min-width: 768px) and (max-width: 991px) {
   .content-wrap {
